@@ -1,0 +1,33 @@
+READ R0 ; Número
+READ R1 ; Expoente
+LOAD R2 ZERO ; Se o expoente for 0
+LOAD R7 ONE ; Imprime 1
+COPY R3 R1
+SUB R3 R2
+JZ PRINT
+LOAD R2 ONE ; Se o expoente for 1
+COPY R7 R0 ; Imprime o proprio numero
+COPY R3 R1
+SUB R3 R2
+JZ PRINT
+LOAD R2 ONE ; Contador i
+LOAD R3 ONE ; Incremento
+COPY R8 R0 ; Aux para teste
+EXP: COPY R5 R2 ; Compara contador e expoente
+SUB R5 R1
+JZ PRINT ; Finaliza loop
+LOAD R4 ZERO ; Contador j
+LOAD R7 ZERO ; Resultado
+MULT: COPY R6 R4 ; Compara contador e número
+SUB R6 R0
+JZ CONTINUE ; Finaliza loop
+ADD R7 R8 ; Multiplicação usando soma
+ADD R4 R3 ; Incrementa contador
+JMP MULT
+CONTINUE: ADD R2 R3 ; Incrementa contador
+COPY R8 R7
+JMP EXP
+PRINT: WRITE R7
+HALT
+ZERO: WORD 0
+ONE: WORD 1

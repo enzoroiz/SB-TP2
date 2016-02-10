@@ -1,0 +1,25 @@
+READ R0 ; Dividendo
+READ R1 ; Divisor
+LOAD R2 ONE ; R2 = 1 Incrementar contador
+LOAD R3 ZERO ; R3 = 0 Contador
+COPY R5 R1 ; Verifica se divisor é 0
+SUB R5 R3
+LOAD R1 ZERO
+JZ PRINT
+COPY R1 R5
+COPY R6 R1
+COPY R5 R0 ; Verifica se dividendo é 0
+SUB R5 R3
+LOAD R1 ZERO
+JZ PRINT
+COPY R1 R6
+LOOP: SUB R0 R1 ; Dividendo - Divisor
+JN PRINT
+ADD R3 R2 ; Contador ++
+JMP LOOP
+PRINT: WRITE R3
+ADD R0 R1 Imprime resto
+WRITE R0
+HALT
+ZERO: WORD 0
+ONE: WORD 1
